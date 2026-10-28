@@ -1,21 +1,4 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $cep = $_POST['cep'];
-    function buscarCep(string $cep)
-    {
-        $cep = preg_replace('/\D/', '', $cep);          // deixa só números
-        if (strlen($cep) !== 8) return null;            // CEP tem 8 dígitos
 
-        $json = @file_get_contents("https://viacep.com.br/ws/$cep/json/");
-        if ($json === false) return null;               // falha de rede
-
-        $dados = json_decode($json, true);
-        return isset($dados['erro']) ? null : $dados;   // CEP inexistente
-    }
-
-    $result = buscarCep($cep);
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
